@@ -12,8 +12,9 @@ def hello(event, context):
     }
     print(event)
     payload = json.loads(event['body'])
-    print(payload['ref'])
-
+    headers = json.loads(event['headers'])
+    print(payload)
+    print(headers)
     return response
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
