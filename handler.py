@@ -22,7 +22,6 @@ def hello(event, context):
 
     print(json.dumps(event))
     headers = json.dumps(event['headers'])
-    print(payload)
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
 
