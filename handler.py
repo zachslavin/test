@@ -15,7 +15,7 @@ def hello(event, context):
     payload = json.loads(event['body'])
     headers = json.dumps(event['headers'])
     print(payload)
-    print(headers)
+    print(headers['X-Hub-Signature'])
     return response
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
