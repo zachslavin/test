@@ -1,4 +1,7 @@
 import json
+import hmac
+import base64
+import hashlib
 
 def hello(event, context):
     body = {
@@ -18,6 +21,14 @@ def hello(event, context):
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
     return response
+
+    def _hmac_is_valid(body, secret, hmac_to_verify):
+        hash = hmac.new(secret, body, hashlib.sha256)
+        hmac_calculated = base64.b64encode(hash.digest())
+        return hmac_calculated == hmac_to_verify
+
+    if _hmac_is_valid(payload, 'supersecret', sig.split('=')[1]):
+        print("True")
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
     """
