@@ -5,12 +5,10 @@ import hashlib
 
 def _hmac_is_valid(body, secret, hmac_to_verify):
     hash = hmac.new(secret, body, hashlib.sha1)
+    digest = hmac.new(secret, msg=body, digestmod=hashlib.sha1).hexdigest()
     hmac_calculated = base64.b64encode(hash.digest())
-    print(dir(hash))
-    print(body)
-    print(hash.hexdigest())
-    print(hmac_calculated)
     print(hmac_to_verify)
+    print(hmac_calculated)
     return hmac_calculated == hmac_to_verify
 
 def hello(event, context):
@@ -32,7 +30,7 @@ def hello(event, context):
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
 
-    if _hmac_is_valid(gitbody, 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
+    if _hmac_is_valid(event['body'], 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
         print("True")
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
