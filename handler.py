@@ -20,8 +20,7 @@ def hello(event, context):
     print(payload)
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
-    return response
-
+    
     def _hmac_is_valid(body, secret, hmac_to_verify):
         hash = hmac.new(secret, body, hashlib.sha256)
         hmac_calculated = base64.b64encode(hash.digest())
