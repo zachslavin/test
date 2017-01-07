@@ -13,7 +13,7 @@ def _hmac_is_valid(body, secret, hmac_to_verify):
 def hello(event, context):
     print(os.environ['SECRET_KEY'])
     body = {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
+        "message": "Successfully processed webhook!",
         "input": event
     }
 
@@ -30,10 +30,4 @@ def hello(event, context):
     if _hmac_is_valid(event['body'], 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
         print("True")
 
-    # Use this code if you don't use the http event with the LAMBDA-PROXY integration
-    """
-    return {
-        "message": "Go Serverless v1.0! Your function executed successfully!",
-        "event": event
-    }
-    """
+    return response
