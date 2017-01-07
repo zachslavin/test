@@ -32,7 +32,7 @@ def hello(event, context):
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
 
-    if _hmac_is_valid(str(json.dumps(event['body'])), 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
+    if _hmac_is_valid(json.dumps(event['body'])), 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
         print("True")
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
