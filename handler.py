@@ -2,6 +2,7 @@ import json
 import hmac
 import base64
 import hashlib
+import os
 
 def _hmac_is_valid(body, secret, hmac_to_verify):
     digest = hmac.new(secret, msg=body, digestmod=hashlib.sha1).hexdigest()
@@ -10,6 +11,7 @@ def _hmac_is_valid(body, secret, hmac_to_verify):
     return digest == hmac_to_verify
 
 def hello(event, context):
+    print(os.environ['SECRET_KEY'])
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
         "input": event
