@@ -26,7 +26,7 @@ def hello(event, context):
         hmac_calculated = base64.b64encode(hash.digest())
         return hmac_calculated == hmac_to_verify
 
-    if _hmac_is_valid(payload, 'supersecret', str(sig).split('=')[1]):
+    if _hmac_is_valid(str(payload), 'supersecret', str(sig).split('=')[1]):
         print("True")
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
