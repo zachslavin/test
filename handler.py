@@ -8,7 +8,7 @@ def _hmac_is_valid(body, secret, hmac_to_verify):
     digest = hmac.new(secret, msg=body, digestmod=hashlib.sha1).hexdigest()
     hmac_calculated = base64.b64encode(hash.digest())
     print(hmac_to_verify)
-    print(hmac_calculated)
+    print(digest)
     return hmac_calculated == hmac_to_verify
 
 def hello(event, context):
