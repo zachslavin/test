@@ -4,12 +4,10 @@ import base64
 import hashlib
 
 def _hmac_is_valid(body, secret, hmac_to_verify):
-    hash = hmac.new(secret, body, hashlib.sha1)
     digest = hmac.new(secret, msg=body, digestmod=hashlib.sha1).hexdigest()
-    hmac_calculated = base64.b64encode(hash.digest())
     print(hmac_to_verify)
     print(digest)
-    return hmac_calculated == hmac_to_verify
+    return digest == hmac_to_verify
 
 def hello(event, context):
     body = {
@@ -21,10 +19,8 @@ def hello(event, context):
         "statusCode": 200,
         "body": json.dumps(body)
     }
-    print(event)
+
     print(json.dumps(event))
-    payload = json.loads(event['body'])
-    gitbody = json.dumps(event['body'])
     headers = json.dumps(event['headers'])
     print(payload)
     sig = json.loads(headers)
