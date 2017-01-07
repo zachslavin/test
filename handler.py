@@ -11,6 +11,8 @@ def hello(event, context):
         "body": json.dumps(body)
     }
     print(event)
+    payload = json.loads(event['body'])
+    print(payload)
 
     return response
 
