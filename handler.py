@@ -11,10 +11,11 @@ def hello(event, context):
         "body": json.dumps(body)
     }
     print(event)
+    print(json.dumps(event))
     payload = json.loads(event['body'])
-    headers = json.loads(event['headers'])
+    #headers = json.loads(event['headers'])
     print(payload)
-    print(headers)
+    #print(headers)
     return response
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
