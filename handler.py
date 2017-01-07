@@ -12,7 +12,7 @@ def hello(event, context):
     }
     print(event)
     payload = json.loads(event['body'])
-    print(payload)
+    print(payload['ref'])
 
     return response
 
