@@ -6,6 +6,7 @@ import hashlib
 def _hmac_is_valid(body, secret, hmac_to_verify):
     hash = hmac.new(secret, body, hashlib.sha1)
     hmac_calculated = base64.b64encode(hash.digest())
+    print(body)
     print(hmac_calculated)
     print(hmac_to_verify)
     return hmac_calculated == hmac_to_verify
