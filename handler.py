@@ -3,6 +3,13 @@ import hmac
 import base64
 import hashlib
 
+def _hmac_is_valid(body, secret, hmac_to_verify):
+    hash = hmac.new(secret, body, hashlib.sha256)
+    hmac_calculated = base64.b64encode(hash.digest())
+    print(hmac_calculated)
+    print(hmac_to_verify)
+    return hmac_calculated == hmac_to_verify
+
 def hello(event, context):
     body = {
         "message": "Go Serverless v1.0! Your function executed successfully!",
@@ -20,11 +27,6 @@ def hello(event, context):
     print(payload)
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
-
-    def _hmac_is_valid(body, secret, hmac_to_verify):
-        hash = hmac.new(secret, body, hashlib.sha256)
-        hmac_calculated = base64.b64encode(hash.digest())
-        return hmac_calculated == hmac_to_verify
 
     if _hmac_is_valid(str(payload), 'supersecret', str(sig).split('=')[1]):
         print("True")
