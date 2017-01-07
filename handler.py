@@ -13,9 +13,9 @@ def hello(event, context):
     print(event)
     print(json.dumps(event))
     payload = json.loads(event['body'])
-    #headers = json.loads(event['headers'])
+    headers = json.dumps(event['headers'])
     print(payload)
-    #print(headers)
+    print(headers)
     return response
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
