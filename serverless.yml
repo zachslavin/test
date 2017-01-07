@@ -53,6 +53,9 @@ provider:
 #    - exclude-me.py
 #    - exclude-me-dir/**
 
+custom:
+  secrets: ${file(secrets.yml)}
+
 functions:
   create:
     handler: handler.hello
@@ -60,7 +63,8 @@ functions:
       - http:
           path: posts/webhook
           method: post
-
+    environment:
+      SECRET_KEY: ${self:custom.secrets.SECRET_KEY}
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
