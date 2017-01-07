@@ -24,12 +24,13 @@ def hello(event, context):
     print(event)
     print(json.dumps(event))
     payload = json.loads(event['body'])
+    gitbody = json.dumps(payload)
     headers = json.dumps(event['headers'])
     print(payload)
     sig = json.loads(headers)
     print(sig['X-Hub-Signature'])
 
-    if _hmac_is_valid(str(payload), 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
+    if _hmac_is_valid(str(gitbody), 'supersecret', str(sig['X-Hub-Signature']).split('=')[1]):
         print("True")
 
     # Use this code if you don't use the http event with the LAMBDA-PROXY integration
