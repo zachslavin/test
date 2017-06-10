@@ -1,6 +1,16 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "testAPI"
+        "title": "testAPI",
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "paths": {
+        "/account": {
+            "get": {}
+        },
+        "/account/{id}": {}
     }
 }
